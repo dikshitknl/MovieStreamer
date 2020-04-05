@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+{% block container %}
+	{% if user.is_authenticated %}
+	You are admin.
+{% else %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Details of your movie with keyword "{{ keyword }}"</h5>
+        
+    </div>
+	{% if movies %}
+		{% for movie in movies %}
+			<div class="card-body">
+				<div class="card-header">
+					        <h5 class="card-title">Name: {{ movie.name }}</h5>
+				</div>
+				<div class="card-header">
+					        <h5 class="card-title">Streams on: {{ movie.streamer.name }}</h5>
+				</div>
+				<div class="card-header">
+					        <h5 class="card-title">Link to the site: <a href="{{ movie.streamer.url }}">{{ movie.streamer.url }}</a></h5>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+	<div class="card-body">
+        <div class="card-header">
+		Not Found.
+    	</div>
+    </div>
+	{% endif %}
+</div>
+	{% endif %}
+{% endblock %}
